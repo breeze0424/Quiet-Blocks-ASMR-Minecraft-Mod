@@ -1,0 +1,7 @@
+.downloads/
+.toolchains/
+**/.gradle/
+**/build/
+**/run/
+**/run-data/
+**/out/

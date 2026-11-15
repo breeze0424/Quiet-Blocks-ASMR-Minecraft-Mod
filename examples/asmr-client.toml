@@ -1,0 +1,19 @@
+# 只控制本机听到的 ASMR，不影响游戏原声。
+[audio]
+	enabled = true
+	# 音量还会受游戏主音量影响。
+	volume = 0.35
+	# 以下间隔的单位都是游戏刻，20 刻约为 1 秒。
+	tapIntervalTicks = 16
+	scratchIntervalTicks = 24
+	# 风铃每次的实际间隔会随机变化。
+	chimeIntervalTicks = 14
+	voiceIntervalTicks = 70
+	rainIntervalTicks = 20
+	paperIntervalTicks = 24
+	brushIntervalTicks = 20
+	fireIntervalTicks = 20
+	# 只改变 ASMR 的左右宽度。
+	radius = 1.5
+	# 转一圈所需的游戏刻数，越小越快。
+	orbitPeriodTicks = 160

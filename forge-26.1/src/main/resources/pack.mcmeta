@@ -1,0 +1,10 @@
+{
+  "pack": {
+    "description": "ASMR 资源",
+    "max_format": 101,
+    "min_format": [
+      101,
+      1
+    ]
+  }
+}

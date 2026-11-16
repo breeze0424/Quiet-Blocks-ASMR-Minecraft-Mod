@@ -10,10 +10,24 @@
 
 支持版本：
 
-| 工程 | Minecraft | Forge | Java 目标版本 |
+| 工程 | Minecraft | 加载器 | Java 目标版本 |
 | --- | --- | --- | --- |
-| `forge-26.1` | 26.1–26.1.2 | 62.0.9–64.x | 25 |
-| `forge-1.16.5` | 1.16.5 | 36.2.42 | 8 |
+| `forge-26.1` | 26.1–26.1.2 | Forge 62.0.9–64.x | 25 |
+| `forge-1.20.1` | 1.20.1 | Forge 47.1.3 起；NeoForge 47.1.106 | 17 |
+| `forge-1.19.2` | 1.19.2 | Forge 43.5.0 起 | 17 |
+| `forge-1.16.5` | 1.16.5 | Forge 36.2.42 | 8 |
+
+按 Minecraft 版本和加载器选择一个 JAR，放进游戏实例的 `mods` 文件夹。1.20.1 的 Forge 与 NeoForge 包不要同时安装。
+
+| 游戏环境 | JAR |
+| --- | --- |
+| 1.20.1 Forge | `forge-1.20.1/build/libs/asmr-mc1.20.1-forge-1.3.5.jar` |
+| 1.20.1 NeoForge | `forge-1.20.1/build/libs/asmr-mc1.20.1-neoforge-1.3.5.jar` |
+| 1.19.2 Forge | `forge-1.19.2/build/libs/asmr-mc1.19.2-forge-1.3.5.jar` |
+
+这些版本的代码已编译通过；1.20.1 的两个包使用相同的类文件。游戏内表现仍以实际安装测试为准。
+
+从源码构建时，1.20.1 Forge 运行 `gradle -p forge-1.20.1 build`，NeoForge 运行 `gradle -p forge-1.20.1 build -Ploader=neoforge`，1.19.2 Forge 运行 `gradle -p forge-1.19.2 build`。构建环境需要 Java 17。
 
 
 ## 功能

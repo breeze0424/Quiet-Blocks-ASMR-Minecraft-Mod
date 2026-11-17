@@ -4,7 +4,8 @@ license="MIT"
 
 [[mods]]
 modId="asmr"
-version="1.3.5"
+version="1.4.0"
+displayTest="NONE"
 displayName="静听方块 ASMR | Quiet Blocks ASMR"
 authors="breeze0424"
 logoFile="asmr-icon.png"

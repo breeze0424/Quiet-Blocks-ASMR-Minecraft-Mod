@@ -6,6 +6,7 @@ import com.cmcplugins.asmr.core.AsmrMode;
 import com.cmcplugins.asmr.core.AsmrPattern;
 import com.cmcplugins.asmr.core.AsmrSynth;
 import com.mojang.blaze3d.platform.InputConstants;
+import java.util.Locale;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.sounds.SoundSource;
@@ -32,6 +33,7 @@ public final class ClientAsmr {
     public static void register() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientAsmr::registerKey);
         MinecraftForge.EVENT_BUS.addListener(ClientAsmr::tick);
+        MinecraftForge.EVENT_BUS.addListener(ClientAsmrCommands::register);
     }
 
     private static void registerKey(RegisterKeyMappingsEvent event) {
@@ -45,6 +47,31 @@ public final class ClientAsmr {
     public static void openMenu() {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.player != null) minecraft.setScreen(new AsmrMenuScreen());
+    }
+
+    public static boolean serverPresent() {
+        Minecraft minecraft = Minecraft.getInstance();
+        return minecraft.getConnection() != null
+            && AsmrNetwork.isRemotePresent(minecraft.getConnection().getConnection());
+    }
+
+    public static void play(AsmrKind selectedKind, AsmrMode selectedMode) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.player == null || minecraft.getConnection() == null) return;
+        if (serverPresent()) {
+            // 客户端命令会拦截 sendCommand，这里直接转发无需签名的服务端命令。
+            minecraft.getConnection().sendUnsignedCommand("asmr play " + selectedKind.name().toLowerCase(Locale.ROOT)
+                + " " + selectedMode.name().toLowerCase(Locale.ROOT));
+        } else {
+            receive(new AsmrPacket(true, selectedKind, selectedMode));
+        }
+    }
+
+    public static void stop() {
+        stopLocally();
+        Minecraft minecraft = Minecraft.getInstance();
+        if (serverPresent())
+            minecraft.getConnection().sendUnsignedCommand("asmr stop");
     }
 
     public static void stopLocally() {

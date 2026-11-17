@@ -136,15 +136,11 @@ public final class AsmrMenuScreen extends Screen {
     }
 
     private void sendPlay() {
-        if (minecraft != null && minecraft.getConnection() != null)
-            minecraft.getConnection().sendCommand("asmr play " + kind.name().toLowerCase(Locale.ROOT)
-                + " " + mode.name().toLowerCase(Locale.ROOT));
+        ClientAsmr.play(kind, mode);
     }
 
     private void sendStop() {
-        ClientAsmr.stopLocally();
-        if (minecraft != null && minecraft.getConnection() != null)
-            minecraft.getConnection().sendCommand("asmr stop");
+        ClientAsmr.stop();
     }
 
     @Override
